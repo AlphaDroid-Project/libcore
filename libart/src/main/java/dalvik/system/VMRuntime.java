@@ -1023,4 +1023,29 @@ public final class VMRuntime {
      */
     @SystemApi(client = MODULE_LIBRARIES)
     public static native boolean isValidClassLoaderContext(String encodedClassLoaderContext);
+
+    /**
+     * Returns the optimization status of the base APK loaded in this process. If called in a
+     * process without an APK, returns
+     *
+     * @hide
+     */
+    public static native DexFile.OptimizationInfo getBaseApkOptimizationInfo();
+
+    /**
+     * Returns a C++ pointer, encoded as a long, to an ART native function that has been
+     * made available for system use.
+     *
+     * Currently the only function that can be retrieved this way is:
+     *
+     * jstring InternedOrNewStringUTF(JNIEnv* env, const char* utf8_data);
+     *
+     * @param funcName the name of the desired C++ function
+     * @param numArgs the number of arguments of the desired C++ function
+     * @return a function pointer to the requested function. 0 if it does not exist.
+     *
+     * @hide
+     */
+    @SystemApi(client = MODULE_LIBRARIES)
+    public static native long getNativeFunctionPtr(String funcName, int numArgs);
 }
